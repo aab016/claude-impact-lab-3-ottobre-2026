@@ -47,6 +47,37 @@ arrivare il 3 ottobre con contesto concreto invece che a mani vuote.
 - [`scaffold/`](scaffold/) — uno scheletro tecnico minimo (backend FastAPI +
   Claude API, frontend di chat senza dipendenze) pronto da clonare ed
   estendere velocemente durante le giornate di build.
+- [`examples/typesafe-noul-urgenza/`](examples/typesafe-noul-urgenza/) —
+  esempio di utilizzo delle [TypeSafe AI API](https://docs.typesafe.ai/) per
+  rilevare il tono di urgenza in un messaggio, con la primitiva Noul (vedi
+  nota su RLCD più sotto). Un possibile complemento all'assistente
+  conversazionale in `scaffold/`: smistare per priorità le richieste dei
+  cittadini prima ancora di rispondere.
+
+## Nota su RLCD (Reinforcement Learning for Calibrated Decisions)
+
+Le [TypeSafe AI API](https://docs.typesafe.ai/) (usate nell'esempio
+`examples/typesafe-noul-urgenza/`) seguono un approccio diverso da Claude:
+invece di generare testo, il loro modello `jev-latest` è addestrato con un
+metodo che chiamano **RLCD — Reinforcement Learning for Calibrated
+Decisions**, descritto nella documentazione come un metodo che "trains
+TypeSafe to return decisions and calibrated probabilities instead of
+generated text" ([fonte](https://docs.typesafe.ai/introduction/machine-learning-primer)).
+
+In pratica: a una domanda sì/no (primitiva [`Noul`](https://docs.typesafe.ai/primitives/noul))
+il modello non risponde con una frase, ma con un numero tra 0 e 1 — la
+probabilità calibrata che la risposta sia "sì". "Calibrata" significa che,
+su tante previsioni, le risposte a cui il modello assegna probabilità 0.8
+dovrebbero rivelarsi corrette circa l'80% delle volte: la sicurezza
+dichiarata riflette l'affidabilità reale, non solo la sicurezza con cui il
+testo "suona giusto" (come nell'RLHF usato per i chatbot).
+
+Perché interessa questo repository: è un tassello utile per la domanda
+"cosa succede quando il sistema sbaglia" posta durante la Claude
+Conversation del 9 settembre — un numero calibrato permette di decidere in
+modo esplicito, nel codice, sotto quale soglia di confidenza una richiesta
+del cittadino deve passare a un operatore umano invece che essere gestita
+in automatico.
 
 ## Da fare prima del 3 ottobre
 
