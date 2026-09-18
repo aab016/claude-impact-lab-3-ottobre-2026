@@ -53,6 +53,14 @@ arrivare il 3 ottobre con contesto concreto invece che a mani vuote.
   nota su RLCD più sotto). Un possibile complemento all'assistente
   conversazionale in `scaffold/`: smistare per priorità le richieste dei
   cittadini prima ancora di rispondere.
+- [`examples/openjev-noul-locale/`](examples/openjev-noul-locale/) — la
+  stessa demo di rilevamento urgenza, ma senza servizio esterno: un modello
+  open (di partenza, MiniCPM5-2B) eseguito in locale in backend, con la
+  tecnica di lettura diretta dei logit descritta dal progetto
+  [OpenJev](https://openjev.com/). Il modello da eseguire è una scelta di
+  chi gestisce il backend (es. il Comune di Milano), non del codice — utile
+  per confrontare un servizio ospitato (TypeSafe) con un'alternativa
+  autogestita.
 
 ## Nota su RLCD (Reinforcement Learning for Calibrated Decisions)
 
